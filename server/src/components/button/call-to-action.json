@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_button_call_to_actions",
+  "info": {
+    "displayName": "Call to action",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    },
+    "buttonContent": {
+      "type": "string"
+    }
+  }
+}

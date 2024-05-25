@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "server"
+  ],
+  "scripts": {
+    "start:frontend": "yarn workspace frontend start",
+    "build:frontend": "yarn workspace frontend build",
+    "build:server": "yarn workspace server build",
+    "start:server": "yarn workspace server start",
+    "dev:server": "yarn workspace server run dev",
+    "dev:frontend": "yarn workspace frontend run dev",
+    "dev": "concurrently \"yarn dev:server\" \"yarn dev:frontend\""
+  },
+  "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.5.3",
+    "concurrently": "^7.0.0"
+  }
+}

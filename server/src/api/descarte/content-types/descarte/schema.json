@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "descartes",
+  "info": {
+    "singularName": "descarte",
+    "pluralName": "descartes",
+    "displayName": "Descarte",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "descricao_descarte": {
+      "type": "text"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "data": {
+      "type": "date",
+      "required": true
+    },
+    "residuo": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::residuo.residuo"
+    },
+    "local": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::captacao-de-receptor.captacao-de-receptor"
+    }
+  }
+}
