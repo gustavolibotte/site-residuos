@@ -39,9 +39,9 @@ export default function Logistica(props) {
   const router = useRouter();
   const [residuo, setResiduo] = useState("");
   const [results, setResults] = useState([]);
-  const [alreadySearch, setAlreadySearch] = useState(false)
+  const [alreadySearch, setAlreadySearch] = useState(false);
   const [selectedResult, setSelectedResult] = useState(null);
-  const { residuos } = props;
+  const { residuos = [] } = props; // Default to empty array if undefined
 
   const linkElements = useRef(null);
   const iframeRef = useRef(null);

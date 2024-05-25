@@ -1,22 +1,13 @@
-export const formValuesToRequest = (values, categorias, residuos) => {
-  const categoria = categorias.find((c) => c.id == values.categoria);
+export const formValuesToRequest = (values) => {
+  console.log("values: ", values);
+
   return {
-    categoria: {
-      id: categoria.id,
-      ...categoria.attributes,
-    },
+    categoria: values.categoriaSelecionada,
     condicao: values.condicao,
     email: values.email,
     infoVerdadeira: values.infoVerdadeira,
     nome: values.nome,
-    residuos: values.residuos.map((rId) => {
-      const id = parseInt(rId);
-      const residuo = residuos.find((r) => r.id === id);
-      return {
-        id: residuo.id,
-        ...residuo.attributes,
-      };
-    }),
+    residuos: values.residuosSelecionados,
     telefone: values.telefone,
     cidade: values.cidade,
     estado: values.estado,
