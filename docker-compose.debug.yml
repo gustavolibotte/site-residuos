@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  siteresiduos:
+    image: siteresiduos
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 1337:1337
+      - 9229:9229
+    command: ["node", "--inspect=0.0.0.0:9229", "server.js"]

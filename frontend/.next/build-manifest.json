@@ -35,10 +35,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/cadastro-receptor.js"
     ],
-    "/confirmacao": [
+    "/logisticareversa": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/confirmacao.js"
+      "static/chunks/pages/logisticareversa.js"
+    ],
+    "/residuo/[slug]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/residuo/[slug].js"
     ]
   },
   "ampFirstPages": []

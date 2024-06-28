@@ -26,7 +26,7 @@ import { IoIosMap } from "react-icons/io";
 import { MdChangeCircle } from "react-icons/md";
 import { govApiFetcher } from "../lib/api";
 import { getPontosCaptacao } from "../lib/pontosCaptacao";
-import { Feature } from "./feature";
+import { Feature } from "./Feature";
 import { useSimpleForm } from "../hooks/useSimpleForm";
 import { useRouter } from "next/router";
 

@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  siteresiduos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 1337:1337
+      - 3000:3000
