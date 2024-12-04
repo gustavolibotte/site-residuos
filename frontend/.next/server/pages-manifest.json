@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/logisticareversa": "pages/logisticareversa.js",
-  "/": "pages/index.js",
-  "/residuo/[slug]": "pages/residuo/[slug].js"
+  "/devolucao": "pages/devolucao.js",
+  "/login": "pages/login.js",
+  "/cadastro-receptor": "pages/cadastro-receptor.js"
 }

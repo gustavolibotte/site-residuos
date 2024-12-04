@@ -35,10 +35,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/cadastro-receptor.js"
     ],
-    "/logisticareversa": [
+    "/devolucao": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/logisticareversa.js"
+      "static/chunks/pages/devolucao.js"
+    ],
+    "/login": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/login.js"
     ],
     "/residuo/[slug]": [
       "static/chunks/webpack.js",
