@@ -1,165 +1,214 @@
-```markdown
-# Site Resíduos - Plataforma de Gestão e Coleta
+# ♻️ Site Resíduos — Plataforma de Gestão e Coleta
 
-Este é um projeto monorepo contendo o Frontend (Next.js) e o Backend (Strapi CMS), totalmente containerizado com Docker para garantir consistência entre ambientes de desenvolvimento e produção.
+Monorepo contendo **Frontend (Next.js)** e **Backend (Strapi CMS)**, totalmente containerizado com **Docker**, garantindo consistência entre ambientes de desenvolvimento e produção.
+
+---
 
 ## 📋 Pré-requisitos
 
-Para executar este projeto, você precisa ter instalado na sua máquina apenas:
+Você precisa ter instalado **apenas**:
 
 * **Docker**
 * **Docker Compose**
 
-> **Nota:** Não é necessário ter Node.js ou Yarn instalados localmente, pois tudo é gerenciado pelos containers.
+> ℹ️ **Nota:** Não é necessário instalar Node.js, Yarn ou dependências locais. Tudo é gerenciado dentro dos containers.
 
 ---
 
-## Como Executar Localmente
+## 🚀 Executando o Projeto Localmente
 
-Siga estes passos para rodar o projeto no seu computador:
+### 1️⃣ Clonar o Repositório
 
-### 1. Clonar o Repositório
-Baixe o projeto para uma pasta de sua preferência:
 ```bash
 git clone <URL_DO_SEU_REPOSITORIO>
 cd site-residuos
-
 ```
 
-### 2. Iniciar os Serviços
+---
 
-Execute o comando abaixo para construir as imagens e subir os containers.
-*Este passo pode levar alguns minutos na primeira vez.*
+### 2️⃣ Iniciar os Serviços
+
+Construa as imagens e suba os containers:
 
 ```bash
 docker-compose up --build
-
 ```
 
-### 3. Acessar a Aplicação
+> ⏳ Na primeira execução, esse processo pode levar alguns minutos.
 
-Após o terminal indicar que os serviços estão rodando (mensagens de "Ready" ou "Welcome back"), acesse:
+---
 
-* **Site (Frontend):** [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000)
-* **Painel Administrativo (Backend):** [http://localhost:1337/admin](https://www.google.com/search?q=http://localhost:1337/admin)
+### 3️⃣ Acessar a Aplicação
 
-> **Login:** Utilize as credenciais de administrador configuradas (os dados estão salvos no banco de dados incluído no repositório).
+Após os serviços estarem ativos (mensagens como *Ready* ou *Welcome back* no terminal):
 
-### 4. Parar a Aplicação
+* 🌐 **Frontend (Site):** [http://localhost:3000](http://localhost:3000)
+* 🛠️ **Backend (Admin Strapi):** [http://localhost:1337/admin](http://localhost:1337/admin)
 
-Para desligar os serviços, pressione `Ctrl+C` no terminal ou execute em outra aba:
+> 🔐 **Login:** Utilize as credenciais de administrador já configuradas.
+> Os dados estão salvos no banco de dados versionado no repositório.
+
+---
+
+### 4️⃣ Parar a Aplicação
+
+Para encerrar os serviços:
+
+* Pressione `Ctrl + C` no terminal
+  **ou**
+* Execute em outra aba:
 
 ```bash
 docker-compose down
-
 ```
 
 ---
 
-## 🖥️ Compatibilidade (Windows / Linux / Mac Intel vs Apple Silicon)
+## 🖥️ Compatibilidade (Windows, Linux, macOS Intel e Apple Silicon)
 
-Este projeto foi configurado utilizando imagens Docker baseadas em **Debian Bullseye**, o que garante alta compatibilidade.
+O projeto utiliza imagens Docker baseadas em **Debian Bullseye**, garantindo alta compatibilidade entre plataformas.
 
-* **Apple Silicon (M1/M2/M3):** O projeto roda nativamente.
-* **Windows / Linux / Mac Intel:** O projeto também rodará sem problemas.
+### ✔️ Plataformas Suportadas
 
-**Como funciona:**
-Quando você roda `docker-compose up --build`, o Docker detecta a arquitetura do seu processador e compila as bibliotecas necessárias (como `sharp` e `sqlite3`) especificamente para a sua máquina dentro do container. Isso elimina conflitos comuns de "binários incompatíveis" ao trocar de computador.
+* **Apple Silicon (M1 / M2 / M3):** Execução nativa
+* **Windows**
+* **Linux**
+* **macOS Intel**
+
+### 🔧 Como isso funciona?
+
+Ao executar `docker-compose up --build`, o Docker detecta automaticamente a arquitetura do processador e compila dependências nativas (como `sharp` e `sqlite3`) **dentro do container**, evitando problemas de binários incompatíveis ao trocar de máquina.
 
 ---
 
-## Guia de Deploy (Servidor Remoto)
+## 🌍 Guia de Deploy (Servidor Remoto)
 
-Para colocar este site no ar em um servidor (VPS como DigitalOcean, AWS, Hetzner etc.):
+### 1️⃣ Preparar o Servidor
 
-### 1. Preparar o Servidor
+Certifique-se de que o servidor possua:
 
-Certifique-se de que o servidor tenha **Docker** e **Git** instalados.
+* **Docker**
+* **Git**
 
-### 2. Baixar o Projeto
+---
 
-No servidor, clone o repositório:
+### 2️⃣ Baixar o Projeto
 
 ```bash
 git clone <URL_DO_SEU_REPOSITORIO>
 cd site-residuos
-
 ```
 
-### 3. Configuração de Segurança (Importante)
+---
 
-O arquivo `docker-compose.yml` atual contém chaves de segurança padrão para desenvolvimento. Para produção, recomenda-se criar um arquivo `.env` no servidor com chaves seguras e alterar o `docker-compose.yml` para ler essas variáveis, ou alterá-las diretamente no arquivo antes de subir:
+### 3️⃣ Configuração de Segurança (Obrigatório para Produção)
+
+O `docker-compose.yml` contém **chaves padrão de desenvolvimento**.
+
+Para produção, recomenda-se:
+
+* Criar um arquivo `.env` com chaves seguras
+* Ajustar o `docker-compose.yml` para ler essas variáveis
+
+Chaves importantes:
 
 * `JWT_SECRET`
 * `API_TOKEN_SALT`
 * `ADMIN_JWT_SECRET`
 
-### 4. Executar em Modo "Detached"
+---
 
-Para rodar o site em segundo plano (para que não feche ao sair do terminal):
+### 4️⃣ Executar em Modo Detached (Segundo Plano)
 
 ```bash
 docker-compose up -d --build
-
 ```
 
-### 5. Configurar Domínio e SSL (Recomendado)
+---
 
-O site estará rodando nas portas `:3000` e `:1337`. Para usar um domínio (ex: `meusite.com`), você deve configurar um **Proxy Reverso** (como Nginx ou Traefik) na frente do Docker.
+### 5️⃣ Configurar Domínio e SSL (Recomendado)
 
-Exemplo básico de fluxo com Nginx:
+Por padrão, os serviços rodam em:
 
-* Redirecionar `meusite.com` -> `localhost:3000` (Frontend)
-* Redirecionar `api.meusite.com` -> `localhost:1337` (Backend)
+* Frontend: `:3000`
+* Backend: `:1337`
+
+Para uso com domínio (ex: `meusite.com`), configure um **Proxy Reverso** como **Nginx** ou **Traefik**.
+
+#### Exemplo de fluxo com Nginx:
+
+* `meusite.com` → `localhost:3000` (Frontend)
+* `api.meusite.com` → `localhost:1337` (Backend)
 
 ---
 
 ## 📂 Estrutura do Projeto
 
-* **`frontend/`**: Aplicação Next.js (React).
-* **`server/`**: Aplicação Strapi (CMS).
-* `public/uploads/`: Imagens e arquivos enviados (versionados no Git).
-* `.tmp/data.db`: Banco de dados SQLite (versionado no Git).
-
-* **`docker-compose.yml`**: Orquestrador que liga o Frontend ao Backend.
-* **`Dockerfile.*`**: Instruções de construção das imagens.
-
-## 🛠️ Desenvolvimento e Manutenção
-
-### Adicionar Novas Dependências
-
-Se precisar instalar um novo pacote (ex: `yarn add axios` no frontend), não faça isso no seu computador local se não tiver o Node 16 instalado. Use o Docker:
-
-1. Acesse o container:
-```bash
-docker exec -it residuos-frontend /bin/sh
-
 ```
-
-2. Instale o pacote:
-```bash
-yarn add axios
-
+site-residuos/
+├── frontend/              # Aplicação Next.js
+├── server/                # Aplicação Strapi CMS
+│   ├── public/uploads/    # Arquivos e imagens enviados (versionados)
+│   └── .tmp/data.db       # Banco de dados SQLite (versionado)
+├── docker-compose.yml     # Orquestra frontend e backend
+├── Dockerfile.*           # Definições de build das imagens
 ```
-
-3. Saia e reconstrua:
-```bash
-exit
-docker-compose up --build
-
-```
-
-### Restaurar Banco de Dados
-
-O arquivo de banco de dados (`server/.tmp/data.db`) e as imagens (`server/public/uploads`) estão sendo rastreados pelo Git.
-
-* Para salvar suas alterações no banco: Faça um `git commit`.
-* Para descartar alterações e voltar ao estado original: `git checkout server/.tmp/data.db`.
 
 ---
 
-**Desenvolvido com:** Next.js, Strapi v4, Docker e SQLite.
+## 🛠️ Desenvolvimento e Manutenção
 
+### ➕ Adicionar Novas Dependências
+
+Caso precise instalar um novo pacote (ex: `axios` no frontend):
+
+1. Acesse o container do frontend:
+
+```bash
+docker exec -it residuos-frontend /bin/sh
 ```
 
+2. Instale o pacote:
+
+```bash
+yarn add axios
 ```
+
+3. Saia do container e reconstrua:
+
+```bash
+exit
+docker-compose up --build
+```
+
+---
+
+### 💾 Restaurar ou Versionar o Banco de Dados
+
+Os seguintes arquivos são **rastreados pelo Git**:
+
+* `server/.tmp/data.db`
+* `server/public/uploads/`
+
+#### 📌 Cenários comuns:
+
+* **Salvar alterações no banco:**
+
+  ```bash
+  git commit
+  ```
+
+* **Descartar alterações e restaurar estado original:**
+
+  ```bash
+  git checkout server/.tmp/data.db
+  ```
+
+---
+
+## 🧰 Tecnologias Utilizadas
+
+* **Next.js**
+* **Strapi v4**
+* **Docker / Docker Compose**
+* **SQLite**
