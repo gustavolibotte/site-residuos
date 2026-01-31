@@ -1,5 +1,3 @@
-Aqui está o conteúdo do arquivo `README.md` em texto plano para você copiar e colar:
-
 ```markdown
 # Site Resíduos - Plataforma de Gestão e Coleta
 
