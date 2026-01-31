@@ -66,6 +66,9 @@ $RECYCLE.BIN/
 ############################
 
 .tmp
+# Exceção: Permitir versionar o banco de dados principal
+!.tmp/data.db
+
 *.log
 *.sql
 *.sqlite
@@ -80,7 +83,9 @@ $RECYCLE.BIN/
 ssl
 .idea
 nbproject
-public/uploads/*
+
+# ALTERADO: Comentado para permitir que as imagens sejam salvas no Git
+# public/uploads/*
 !public/uploads/.gitkeep
 
 ############################
