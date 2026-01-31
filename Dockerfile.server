@@ -1,0 +1,34 @@
+# Usamos Debian (bullseye) em vez de Alpine para melhor compatibilidade com M1/M2 e Python 3
+FROM node:16-bullseye-slim
+
+# Instalar dependências de sistema necessárias para o Sharp e compilação nativa
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3 \
+    libvips-dev \
+    procps \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# 1. Copia os arquivos de configuração de dependências
+COPY package.json yarn.lock ./
+COPY server/package.json ./server/
+COPY frontend/package.json ./frontend/
+
+# 2. Instala todas as dependências do monorepo
+RUN yarn install --frozen-lockfile
+
+# 3. Copia o código fonte do servidor
+COPY server ./server
+
+# 4. Define o diretório de trabalho para dentro da pasta server
+WORKDIR /app/server
+
+# 5. Gera o build do admin do Strapi
+RUN yarn build
+
+EXPOSE 1337
+
+# CORREÇÃO: O script no package.json chama-se 'dev', não 'develop'
+CMD ["yarn", "dev"]

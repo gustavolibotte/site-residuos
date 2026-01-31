@@ -1,0 +1,29 @@
+# Usamos Debian (bullseye) em vez de Alpine para consistência
+FROM node:16-bullseye-slim
+
+WORKDIR /app
+
+# Instalar dependências básicas
+RUN apt-get update && apt-get install -y \
+    python3 \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 1. Copia os arquivos de configuração de dependências
+COPY package.json yarn.lock ./
+COPY server/package.json ./server/
+COPY frontend/package.json ./frontend/
+
+# 2. Instala dependências
+RUN yarn install --frozen-lockfile
+
+# 3. Copia o código fonte do frontend
+COPY frontend ./frontend
+
+# 4. Define o diretório de trabalho para dentro da pasta frontend
+WORKDIR /app/frontend
+
+EXPOSE 3000
+
+# Inicia em modo de desenvolvimento
+CMD ["yarn", "dev"]

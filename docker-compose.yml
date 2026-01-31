@@ -1,12 +1,52 @@
 version: '3.4'
 
 services:
-  siteresiduos:
+  # --- BACKEND (STRAPI) ---
+  backend:
+    container_name: residuos-backend
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.server
     environment:
-      NODE_ENV: production
+      - NODE_ENV=development
+      - DATABASE_CLIENT=sqlite
+      - DATABASE_FILENAME=.tmp/data.db
+      - JWT_SECRET=chaveSecretaParaTeste123
+      - API_TOKEN_SALT=saltAleatorioParaTeste
+      - APP_KEYS=chave1,chave2
+      - ADMIN_JWT_SECRET=adminSecret123
+    volumes:
+      - ./server/src:/app/server/src
+      - ./server/config:/app/server/config
+      - ./server/.tmp:/app/server/.tmp
+      # Mapear para AMBOS os locais possíveis para garantir
+      - ./server/public/uploads:/app/server/public/uploads
+      # Alguns setups do Strapi v4 usam .tmp para uploads em dev
+      - ./server/public/uploads:/app/server/.tmp/public/uploads
     ports:
-      - 1337:1337
-      - 3000:3000
+      - "1337:1337"
+    networks:
+      - app-network
+
+  # --- FRONTEND (NEXT.JS) ---
+  frontend:
+    container_name: residuos-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    environment:
+      # Garante que o nome da variável é EXATAMENTE o que está no api.js
+      - NEXT_PUBLIC_API_BASE_URL=http://localhost:1337
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

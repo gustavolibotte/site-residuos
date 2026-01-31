@@ -4,6 +4,13 @@
     "frontend",
     "server"
   ],
+  "resolutions": {
+    "bson": "4.7.2",
+    "color": "4.2.3",
+    "minimatch": "5.1.0",
+    "mkdirp": "1.0.4",
+    "glob": "8.1.0"
+  },
   "scripts": {
     "start:frontend": "yarn workspace frontend start",
     "build:frontend": "yarn workspace frontend build",
